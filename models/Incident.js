@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
+import { loadType } from 'mongoose-float';
 
 import { MediaSchema } from './Media';
 
 const Schema = mongoose.Schema;
+const Float = loadType(mongoose, 8);
 
 const IncidentSchema = new Schema({
     type: {
@@ -26,29 +28,31 @@ const IncidentSchema = new Schema({
         required: true,
     },
     longitude: {
-        type: mongoose.Decimal128,
+        type: Float,
         trim: true,
-        required: [true, 'longitude is required!' ],
+        required: [true, 'longitude is required!'],
         validate: {
-            validator: () => {
+            validator: (longitude) => {
                 const regex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
-                const valid = regex.test(profileImage);
+                const valid = regex.test(longitude);
                 return valid;
             },
             message: () => 'longitude is invalid'
         }
     },
     latitude: {
-        type: mongoose.Decimal128,
-        trim: true,
+        type: Float,
+        // trim: true,
         required: [true, 'latitude is required!' ],
         validate: {
-            validator: () => {
+            validator: (latitude) => {
+                console.log(latitude, '>>>>>>>>>>>>')
                 const regex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
-                const valid = regex.test(profileImage);
+                const valid = regex.test(latitude);
+                console.log('valid-------', valid);
                 return valid;
             },
-            message: () => 'longitude is invalid'
+            message: () => 'latitude is invalid'
         }
     },
     userId: {

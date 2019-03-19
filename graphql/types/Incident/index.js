@@ -61,8 +61,8 @@ const IncidentTypes  = `
     }
 
     type Mutation {
-        reportIncident(type: IncidentType!, status: IncidentStatus!,
-            comment: String!, longitude: Float!, latitude: Float!,
+        reportIncident(type: IncidentType!, comment: String!,
+            longitude: Float!, latitude: Float!,
             videos: [String] = [], images: [String] = []): Incident
         updateIncident(id: String!, type: IncidentType, status: IncidentStatus,
             comment: String, longitude: Float, latitude: Float): Incident

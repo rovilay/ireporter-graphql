@@ -47,7 +47,6 @@ const getPersonalIncidents = (_, { type }) => {
 const createIncident = (_, args, context) => {
     const {
         type,
-        status,
         comment,
         longitude,
         latitude,
@@ -55,7 +54,7 @@ const createIncident = (_, args, context) => {
         images
     } = args
 
-    const newIncident =  new Incident({type, status, comment,
+    const newIncident =  new Incident({type, comment,
         longitude, latitude, videos, images });
 
     return new Promise(async (resolve, reject) => {
@@ -85,7 +84,7 @@ const deleteIncidentMedia = () => {
 
 }
 
-export default {
+export {
     getSingleIncident,
     getAllIncidents,
     createIncident,
